@@ -1,0 +1,43 @@
+name: Update Contribution Heatmap
+
+# When this workflow runs:
+on:
+  schedule:
+    # Runs once a day at 00:00 UTC. Cron syntax: minute hour day month weekday
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+    # Lets you trigger it manually from the Actions tab, useful for testing
+
+# The default GITHUB_TOKEN needs write access so the bot can push the
+# updated SVG back to the repo.
+permissions:
+  contents: write
+
+jobs:
+  update-heatmap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Generate heatmap SVG
+        run: python scripts/generate_heatmap.py
+        env:
+          GH_USERNAME: ${{ github.repository_owner }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit and push if the SVG changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add contrib-heatmap.svg
+          git diff --staged --quiet || git commit -m "chore: update contribution heatmap"
+          git push
