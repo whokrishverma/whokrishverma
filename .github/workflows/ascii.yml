@@ -66,7 +66,7 @@ jobs:
           fi
           TYPE="$(tr -d '[:space:]' < photo.type)"
           if [ "$TYPE" = "illustration" ]; then
-            echo "script=make_ascii_svg_illustration_v2.py" >> "$GITHUB_OUTPUT"
+            echo "script=make_ascii_svg_illustration_v5.py" >> "$GITHUB_OUTPUT"
           elif [ "$TYPE" = "real" ]; then
             echo "script=make_ascii_svg_v1.py" >> "$GITHUB_OUTPUT"
           else

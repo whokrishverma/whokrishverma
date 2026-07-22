@@ -29,7 +29,7 @@ POSTER_LEVELS = 5       # number of distinct tone bands pulled from the flat col
 CROP_BOTTOM = 0.0
 
 # ---- terminal window chrome ------------------------------------------------
-USERNAME = "you"                       # shown in title + status bar, e.g. "avi"
+USERNAME = "whokrishverma"                       # shown in title + status bar, e.g. "avi"
 COMMAND = "./portrait.sh"              # shown in the title bar prompt
 BG = "#0d1117"
 BG2 = "#111722"
