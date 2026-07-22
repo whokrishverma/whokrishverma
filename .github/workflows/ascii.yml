@@ -67,7 +67,7 @@ jobs:
 
       - name: Regenerate ASCII portrait
         if: steps.run_gate.outputs.go == 'true'
-        run: python make_ascii_svg.py photo.jpg ascii.svg
+        run: python make_ascii_svg_illustration_v2.py photo.jpg ascii.svg
 
       - name: Commit changes
         if: steps.run_gate.outputs.go == 'true'
