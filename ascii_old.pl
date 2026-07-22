@@ -4,10 +4,8 @@ on:
   workflow_dispatch:        # manual "Run workflow" button in the Actions tab
   push:
     paths:
-      - 'photo.jpg'                          # runs when you swap the photo directly
-      - 'photo.type'                         # runs when you change illustration/real without swapping the photo
-      - 'make_ascii_svg_v1.py'               # runs when you tweak the real-photo script
-      - 'make_ascii_svg_illustration_v2.py'  # runs when you tweak the illustration script
+      - 'photo.jpg'          # runs when you swap the photo directly
+      - 'make_ascii_svg.py'  # runs when you tweak the script
   schedule:
     - cron: '0 * * * *'    # also checks every hour for a changed GitHub avatar
 
@@ -48,30 +46,12 @@ jobs:
       - name: Decide whether to regenerate
         id: run_gate
         run: |
-          if [ "${{ steps.trigger.outputs.event }}" = "push" ] || [ "${{ steps.trigger.outputs.event }}" = "workflow_dispatch" ]; then
+          if [ "${{ steps.trigger.outputs.event }}" = "push" ]; then
             echo "go=true" >> "$GITHUB_OUTPUT"
           elif [ "${{ steps.check.outputs.changed }}" = "true" ]; then
             echo "go=true" >> "$GITHUB_OUTPUT"
           else
             echo "go=false" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Read photo.type and select script
-        id: select
-        if: steps.run_gate.outputs.go == 'true'
-        run: |
-          if [ ! -f photo.type ]; then
-            echo "::error::photo.type is missing. Create it with contents 'illustration' or 'real'."
-            exit 1
-          fi
-          TYPE="$(tr -d '[:space:]' < photo.type)"
-          if [ "$TYPE" = "illustration" ]; then
-            echo "script=make_ascii_svg_illustration_v2.py" >> "$GITHUB_OUTPUT"
-          elif [ "$TYPE" = "real" ]; then
-            echo "script=make_ascii_svg_v1.py" >> "$GITHUB_OUTPUT"
-          else
-            echo "::error::photo.type contains '$TYPE' — must be exactly 'illustration' or 'real'."
-            exit 1
           fi
 
       - name: Cache rembg model
@@ -87,7 +67,7 @@ jobs:
 
       - name: Regenerate ASCII portrait
         if: steps.run_gate.outputs.go == 'true'
-        run: python ${{ steps.select.outputs.script }} photo.jpg ascii.svg
+        run: python make_ascii_svg_illustration_v2.py photo.jpg ascii.svg
 
       - name: Commit changes
         if: steps.run_gate.outputs.go == 'true'
