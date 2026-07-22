@@ -28,7 +28,7 @@
 
 <h3><code>whokrishverma@github ~ $ ./links.sh</code></h3>
 
-<p><b>AI/ML Intern @ Mankind</b></p>
+<!-- <p><b>AI/ML Intern @ Mankind</b></p> -->
 
 <!-- raw <a> tags (not markdown links) so target="_blank" works -->
 <a href="https://example.com" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Portfolio-example.com-0d1117?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfolio" /></a>
