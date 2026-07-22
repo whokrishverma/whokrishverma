@@ -1,33 +1,64 @@
-============================================================================================================================
 #!/usr/bin/env python3
+"""
+Illustration-mode ASCII portrait generator.
+For flat-shaded comic/illustration art instead of photos.
+Uses edge detection + flat-color background removal instead of
+rembg (ML photo segmentation) + CLAHE (photographic shadow contrast).
+"""
 import sys
 import numpy as np
 import cv2
 from PIL import Image
-from rembg import remove
 
 RAMP = " .`:-=+*cs#%@"
 COLS = 130
-CLAHE_CLIP = 2.2
-GAMMA = 1.35
-CROP_BOTTOM = 0.0      # trim this fraction off the bottom
-FG_LIGHT = "#6e7681"   # grey, readable on GitHub light
-FG_DARK = "#c9d1d9"    # light grey on GitHub dark
+GAMMA = 1.0
+BG_TOLERANCE = 40      # how close to corner color counts as "background". Raise if bg isn't fully removed, lower if it eats into the subject
+EDGE_LOW = 40           # Canny low threshold. Lower = more faint lines detected
+EDGE_HIGH = 120         # Canny high threshold
+LINE_WEIGHT = 2         # how many px to dilate edges (thicker = bolder linework)
+CROP_BOTTOM = 0.0
+FG_LIGHT = "#6e7681"
+FG_DARK = "#c9d1d9"
 CHAR_W = 7.74
 FONT_SIZE = 12.9
 LINE_H = 15
 ROW_DELAY = 0.09
 
+def remove_flat_background(img_rgb, tol=BG_TOLERANCE):
+    """Removes a flat/uniform background by sampling the 4 corners."""
+    arr = np.array(img_rgb).astype(float)
+    h, w, _ = arr.shape
+    corners = np.array([arr[0, 0], arr[0, w - 1], arr[h - 1, 0], arr[h - 1, w - 1]])
+    bg_color = corners.mean(axis=0)
+    dist = np.sqrt(((arr - bg_color) ** 2).sum(axis=2))
+    mask_bg = dist < tol
+    return mask_bg
+
 def prep(path):
-    src = Image.open(path).convert("RGBA")
-    cut = remove(src)
-    alpha = np.array(cut.split()[-1])
-    white = Image.new("RGBA", cut.size, (255, 255, 255, 255))
-    gray = np.array(Image.alpha_composite(white, cut).convert("L"))
-    gray = cv2.bilateralFilter(gray, 11, 50, 50)
-    gray = cv2.createCLAHE(clipLimit=CLAHE_CLIP, tileGridSize=(8, 8)).apply(gray)
-    gray[alpha < 20] = 255
-    return Image.fromarray(gray)
+    src = Image.open(path).convert("RGB")
+    arr = np.array(src)
+    gray = cv2.cvtColor(arr, cv2.COLOR_RGB2GRAY)
+
+    # Background removal (flat-color based, not ML)
+    bg_mask = remove_flat_background(src)
+
+    # Edge detection for linework
+    blurred = cv2.GaussianBlur(gray, (3, 3), 0)
+    edges = cv2.Canny(blurred, EDGE_LOW, EDGE_HIGH)
+    if LINE_WEIGHT > 0:
+        kernel = np.ones((LINE_WEIGHT, LINE_WEIGHT), np.uint8)
+        edges = cv2.dilate(edges, kernel, iterations=1)
+
+    # Build final tone map:
+    # - background -> white (255, blank)
+    # - edges -> black (0, darkest char)
+    # - flat fill areas -> light-mid grey, so shapes still read as filled, not just outlines
+    out = np.full_like(gray, 235)          # default: light fill tone
+    out[edges > 0] = 0                      # edges: darkest
+    out[bg_mask] = 255                      # background: blank
+
+    return Image.fromarray(out)
 
 def to_lines(img, cols=COLS, gamma=GAMMA):
     w, h = img.size
@@ -95,5 +126,3 @@ if __name__ == "__main__":
     print("\n".join(lines))
     build_svg(lines, dst)
     print(f"\nwrote {dst}  ({len(lines)} rows)")
-
-=============================================================================================================================
