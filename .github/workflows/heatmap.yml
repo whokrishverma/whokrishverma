@@ -21,7 +21,7 @@ jobs:
           python-version: "3.11"
 
       - name: Render animated contribution heatmap SVG
-        run: python generate_streak_svg_v1.py whokrishverma contrib-heatmap.svg
+        run: python generate_streak_svg_v1.py AVIVASHISHTA9 contrib-heatmap.svg
 
       - name: Commit updated art
         uses: stefanzweifel/git-auto-commit-action@v5
