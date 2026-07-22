@@ -7,7 +7,7 @@ on:
       - 'photo.jpg'                          # runs when you swap the photo directly
       - 'photo.type'                         # runs when you change illustration/real without swapping the photo
       - 'make_ascii_svg_v1.py'               # runs when you tweak the real-photo script
-      - 'make_ascii_svg_illustration_v2.py'  # runs when you tweak the illustration script
+      - 'make_ascii_svg_illustration_v5.py'  # runs when you tweak the illustration script
   schedule:
     - cron: '0 * * * *'    # also checks every hour for a changed GitHub avatar
 
