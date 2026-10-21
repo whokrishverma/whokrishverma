@@ -32,7 +32,7 @@
 
 <!-- raw <a> tags (not markdown links) so target="_blank" works -->
 <a href="https://whokrishverma.vercel.app/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Portfolio-whokrishverma-0d1117?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfolio" /></a>
-<a href="https://www.linkedin.com/in/whokrishvermaa/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/LinkedIn-whokrishverma-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
+<a href="https://www.linkedin.com/in/whokrishvermaa/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/LinkedIn-whokrishvermaa-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
 <a href="https://leetcode.com/u/whokrishvermaa/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/LeetCode-whokrishvermaa-FFA116?style=for-the-badge&logo=leetcode&logoColor=black" alt="LeetCode" /></a>
 <a href="https://www.instagram.com/whokrishverma/" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Instagram-whokrishverma-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram" /></a>
 <a href="https://www.chess.com/member/whokrishverma" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Chess.com-whokrishverma-81B64C?style=for-the-badge&logo=chess.com&logoColor=white" alt="Chess.com" /></a>
