@@ -43,4 +43,4 @@
 
 
 
-
+[![Profile views](https://komarev.com/ghpvc/?username=whokrishverma&label=Profile%20views&color=7c3aed&style=flat)](https://github.com/whokrishverma)
