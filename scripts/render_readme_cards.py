@@ -27,7 +27,7 @@ ROOT = os.path.join(HERE, "..")
 DATA = os.path.join(ROOT, "data", "contributions.json")
 OUT = os.path.join(ROOT, "cards")
 FONTS = os.path.join(ROOT, "fonts")
-PORTRAIT = os.path.join(ROOT, "avi-ascii.svg")
+PORTRAIT = os.path.join(ROOT, "ascii.svg")
 
 # ---- hand-set numbers (update from avivashishta.com data/stats.json) --------
 REEL_VIEWS = "12.7M"
@@ -193,7 +193,7 @@ def hero():
 </g>
 """
     write("hero.svg", svg(W, h, body, ["serif", "serif-i", "sans", "mono"],
-                          "Avi Vashishta. Fullstack engineer at Dock. I build AI products, make Reels about them, and teach people to do the same."))
+                          "Krish Verma. Fullstack engineer at Dock. I build AI products, make Reels about them, and teach people to do the same."))
 
 
 # ---- 2 · world tiles ----------------------------------------------------------

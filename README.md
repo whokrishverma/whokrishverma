@@ -3,7 +3,7 @@
      Spacing is baked into the SVGs, so keep this block free of blank lines and keep the cards in
      a row on one line with no spaces between them. -->
 <div align="center">
-<a href="https://www.avivashishta.com"><img src="./cards/hero.svg" width="100%" alt="Avi Vashishta. Fullstack engineer at Dock. I build AI products, make Reels about them, and teach people to do the same." /></a><br>
+<a href="https://www.avivashishta.com"><img src="./cards/hero.svg" width="100%" alt="Krish Verma. Fullstack engineer at Dock. I build AI products, make Reels about them, and teach people to do the same." /></a><br>
 <img src="./cards/heatmap.svg" width="100%" alt="Avi's contribution graph, in blue, refreshed daily" /><br>
 <img src="./cards/activity.svg" width="100%" alt="Contributions in the last 12 months, by month, with streak and busiest day" /><br>
 <a href="https://www.avivashishta.com/projects"><img src="./cards/build.svg" width="33.333%" alt="BUILD: 3 startups" /></a><a href="https://www.avivashishta.com/brands"><img src="./cards/brand.svg" width="33.333%" alt="BRAND: 12.7M views" /></a><a href="https://www.avivashishta.com/blog"><img src="./cards/learn.svg" width="33.333%" alt="LEARN: 27.5K readers" /></a><br>

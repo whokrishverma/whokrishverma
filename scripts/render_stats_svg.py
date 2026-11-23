@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Render the streak / numbers card from data/contributions.json (written daily by
-fetch_contributions.py) as a terminal-window SVG that sits beside avi-ascii.svg.
+fetch_contributions.py) as a terminal-window SVG that sits beside ascii.svg.
 
 The canvas is the same size as the portrait (840 x 880) so the two panels line
 up when the README shows them side by side at equal widths. Fonts are sized for
@@ -32,7 +32,7 @@ INK = "#e6edf3"
 GREEN = "#39d353"
 BAR = "#26a641"
 
-W, H = 840, 880                      # == avi-ascii.svg canvas
+W, H = 840, 880                      # == ascii.svg canvas
 PAD = 20
 TITLEBAR_H = 30
 COLS, ROWS = 2, 3
